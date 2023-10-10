@@ -8,17 +8,18 @@ CREATE TABLE IF NOT EXISTS BookDragons(
     eggLine text DEFAULT "?",
     location text DEFAULT "?",
     price int DEFAULT -1,
-    rarity text DEFAULT "?",
-    obtain text DEFAULT "?"
+    rarity text DEFAULT "?"
 );
 
 CREATE TABLE IF NOT EXISTS dragonBaseStats(
     species text,
+    personality text,
     agility int DEFAULT -1,
     strength int DEFAULT -1,
     focus int DEFAULT -1,
     intellect int DEFAULT -1,
-    FOREIGN KEY (species) REFERENCES BookDragons(species)
+    FOREIGN KEY (species) REFERENCES BookDragons(species),
+    FOREIGN KEY (personality) REFERENCES Personalities(personality)
 );
 
 CREATE TABLE IF NOT EXISTS OwnedDragons(
@@ -45,6 +46,7 @@ CREATE TABLE IF NOT EXISTS growingDragons(
 
 CREATE TABLE IF NOT EXISTS Personalities(
     personality text PRIMARY KEY,
-    guaranteed boolean,
+    tier text,
+    guaranteed boolean DEFAULT false,
     requirements text
 );
